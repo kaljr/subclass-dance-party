@@ -65,8 +65,75 @@ $(document).ready(function(){
                     height: "600px"});
     $('body').append($dryingMan);
 
-    $dryingMan.animate({left:"10000px"},50000);
+    $dryingMan.animate({left:"1000px"},1000);
   });
+
+  $("#play").on("click", function(e) {
+  var $guy = $('<span class="guy"></span>');
+  var $bomb = $('<span class="bomb"></span>');
+    $bomb.css({top:"1010px",
+                left: "960px",
+                'background': "url(bomb.png) no-repeat",
+                'background-size': "cover",
+                width: "200px",
+                height: "260px"});
+    $('body').append($bomb);
+    $guy.css({top:"750px",
+                    left:"510px",
+                    'background': "url(tug.png) no-repeat",
+                    'background-size': "cover",
+                    width: "1070px",
+                    height: "520px"});
+    $('body').append($guy);
+
+
+  });
+
+  $("body").keypress(function(e){
+    console.log(e);
+
+      var $guy = $(".guy");
+      var position = $guy.css("left");
+      position = +position.slice(0,position.length-2);
+    if(e.which === 97) {
+      $(".guy").css("left", "" + (position-10) +"px");
+      console.log(position);
+    } else if(e.which === 106 ) {
+      $(".guy").css("left", "" + (position+10) +"px");
+    }
+
+//left blow 740
+
+//righ tblow 320
+if( position === 740 || position === 320 ) {
+ var $explode = $('<span class="explode"></span>');
+    $explode.css({top:"700px",
+                left: "850px",
+                'background': "url(explode.gif) no-repeat",
+                'background-size': "cover",
+                width: "500px",
+                height: "700px"});
+    $('body').append($explode);
+
+    setTimeout(function() {
+      $(".guy").remove();
+      $(".explode").remove();
+      $(".bomb").remove();
+    }, 600);
+}
+
+
+  });
+
+  $("body").on("click", function(e) {
+    //825 left
+    //558 right
+    console.log(e.clientX, e.clientY);
+  });
+
+
+
+
 
 });
 

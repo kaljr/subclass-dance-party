@@ -30,3 +30,26 @@ body, a:link, a:visited, a:active{
 
   position:absolute;
 }
+
+
+.guy {
+
+  position:absolute;
+}
+
+.bomb {
+
+  position:absolute;
+}
+
+
+.explode {
+
+  position:absolute;
+}
+
+body {
+
+  background: url("beach.png") no-repeat ;
+  background-size: cover;
+}
