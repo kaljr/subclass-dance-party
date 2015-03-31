@@ -15,19 +15,58 @@ $(document).ready(function(){
      * A new object of the given type will be created and added
      * to the stage.
      */
-    var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
 
+
+    var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
+    console.dir(dancerMakerFunctionName);
     // get the maker function for the kind of dancer we're supposed to make
     var dancerMakerFunction = window[dancerMakerFunctionName];
 
     // make a dancer with a random position
 
-    var dancer = dancerMakerFunction(
+    var dancer = new dancerMakerFunction(
       $("body").height() * Math.random(),
       $("body").width() * Math.random(),
       Math.random() * 1000
     );
+
     $('body').append(dancer.$node);
+    window.dancers.push(dancer);
+
+  $(".sexyDancer").on("click", function() {
+    console.dir(this);
+    $(this).css("background","url(sandwich.png) no-repeat");
   });
+
+  });
+
+  $("#lineUp").on("click", function(e) {
+
+    var x = 0;
+    console.dir(window.dancers);
+    for(var i=0;i<window.dancers.length;i++) {
+      var numberOfPx = window.dancers[i].$node.css("width");
+      numberOfPx = +numberOfPx.slice(0, numberOfPx.length-2);
+
+      window.dancers[i].lineUp(x);
+      x += (numberOfPx-150);
+    }
+
+  });
+
+  $("#wavify").on("click", function(e) {
+    console.log("here");
+    var x = 0;
+    var $dryingMan = $('<span class="dryingMan"></span>');
+    $dryingMan.css({top:"800px",
+                    left:"-600px",
+                    'background':"url(drying.gif) no-repeat",
+                    width: "600px",
+                    height: "600px"});
+    $('body').append($dryingMan);
+
+    $dryingMan.animate({left:"10000px"},50000);
+  });
+
 });
 
