@@ -35,15 +35,25 @@ $(document).ready(function(){
 
   $(".sexyDancer").on("click", function() {
     console.dir(this);
-    $(this).css("background","url(sandwich.png) no-repeat");
+    $(this).css("background","url(sandwich-wings2.png) no-repeat");
+    $(this).animate({top:"-500px"},3000);
+    setTimeout($().remove.bind($(this)),3500);
   });
 
+
+  $(".sharkDancer").on("click", function() {
+    console.dir(this);
+    $(this).css("background","url(rocket.gif) no-repeat");
+    $(this).css("background-size","cover");
+    $(this).addClass("rotate");
+    $(this).animate({"top":"-500px","left":"0px"},2000);
+    setTimeout($().remove.bind($(this)),3500);
+  });
   });
 
   $("#lineUp").on("click", function(e) {
 
     var x = 0;
-    console.dir(window.dancers);
     for(var i=0;i<window.dancers.length;i++) {
       var numberOfPx = window.dancers[i].$node.css("width");
       numberOfPx = +numberOfPx.slice(0, numberOfPx.length-2);
@@ -65,7 +75,8 @@ $(document).ready(function(){
                     height: "600px"});
     $('body').append($dryingMan);
 
-    $dryingMan.animate({left:"1000px"},1000);
+    $dryingMan.animate({left:"1500px"},1000);
+
   });
 
   $("#play").on("click", function(e) {
@@ -85,9 +96,6 @@ $(document).ready(function(){
                     width: "1070px",
                     height: "520px"});
     $('body').append($guy);
-
-
-  });
 
   $("body").keypress(function(e){
     console.log(e);
@@ -120,20 +128,68 @@ if( position === 740 || position === 320 ) {
       $(".explode").remove();
       $(".bomb").remove();
     }, 600);
-}
+  }
 
 
   });
+
+});//end of play
+
+
 
   $("body").on("click", function(e) {
     //825 left
     //558 right
     console.log(e.clientX, e.clientY);
   });
+    var counter = 0;
+
+  $("#type").on("click",function(e) {
+        if($('.stopwatch')) {
+          $('.stopwatch').remove();
+          counter = 0;
+          $('.answer').remove();
+        }
+
+    $('body').append('<div class="stopwatch"></div>');
+
+    //start timer
+
+
+    var stopwatch = new Stopwatch(document.getElementsByClassName("stopwatch")[0]);
+    stopwatch.start();
+
+
+    var answer = "supercalifragilisticexpialidocious".split("");
+    var $word = $('<span class="answer"></span>');
+     $word.css({top:"700px",
+                    left: "600px",
+                    width: "500px",
+                    height: "700px",
+                    'font-size': "100px"});
+         $('body').append($word);
+
+         console.dir(answer);
+    $('body').keypress(function(e){
+      if(String.fromCharCode(e.which) === answer[counter]) {
+        counter++;
+
+        $word.html(answer.slice(0,counter));
+        //if win (stop)
+        if(counter >=  answer.length) {
+          stopwatch.stop();
+        }
+
+
+      }
+      console.log(String.fromCharCode(e.which));
+    });
+
+
+  });
 
 
 
 
-
-});
+});// outer
 

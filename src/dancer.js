@@ -7,7 +7,6 @@ var makeDancer = function(top, left, timeBetweenSteps){
   this.$node = $('<span class="dancer"></span>');
   this.timeBetweenSteps = timeBetweenSteps;
 
-  this.step = makeDancer.prototype.step;
   this.step();
 
   // now that we have defined the dancer object, we can start setting up important parts of it by calling the methods we wrote
@@ -39,7 +38,7 @@ makeDancer.prototype.setPosition = function(top, left){
 
 makeDancer.prototype.lineUp = function(x) {
 
-  this.$node.animate({top:"800px",left: x+"px"});
+  this.$node.animate({top:"1000px",left: x+"px"});
 
 
 };

@@ -3,6 +3,9 @@ var makeSexyDancer = function(top,left,timeBetweenSteps) {
 
   makeDancer.call(this, top, left, timeBetweenSteps);
 
+  this.$node.css("top", 640 + Math.round(Math.random()*800));
+  this.$node.css("left", Math.round(Math.random()*2200)-300);
+
   this.$node.addClass("sexyDancer");
 
   this.$node.css("background-image", "url(PBJtime.gif)");
@@ -11,8 +14,7 @@ var makeSexyDancer = function(top,left,timeBetweenSteps) {
   this.$node.css("border", "none");
   this.$node.css("border-radius", "none");
 
-  this.oldStep = this.step;
-  this.step = makeSexyDancer.prototype.step;
+
 
 
 
@@ -22,7 +24,7 @@ makeSexyDancer.prototype = Object.create(makeDancer.prototype);
 makeSexyDancer.prototype.constructor = makeSexyDancer;
 
 makeSexyDancer.prototype.step = function() {
-  this.oldStep();
+  makeDancer.prototype.step.call(this);
   // var r = Math.floor(Math.random()*20);
 
   // this.$node.css("width", r+"px ");
